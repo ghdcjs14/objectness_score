@@ -1,7 +1,7 @@
 //
 // Created by hongsun on 19. 4. 9.
 //
-#include <uncertain_obstacle/Collector.h>
+#include <objectness_score/Collector.h>
 
 void Collector::pointCloud2Callback(const sensor_msgs::PointCloud2ConstPtr &msg) {
 

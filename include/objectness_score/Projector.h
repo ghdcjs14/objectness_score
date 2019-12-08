@@ -23,7 +23,7 @@
 #include <pcl_ros/transforms.h>
 #include <pcl/PCLPointCloud2.h>
 #include "pcl_conversions/pcl_conversions.h"
-#include "uncertain_obstacle/Matrix.h"
+#include "objectness_score/Matrix.h"
 
 class Projector {
 public:
@@ -42,7 +42,7 @@ public:
         pc2_sub = new message_filters::Subscriber<sensor_msgs::PointCloud2>(nh_pc2, "/obj_point_cloud", 10);
         tf_pc2_sub = new tf::MessageFilter<sensor_msgs::PointCloud2>(*pc2_sub, tf_Listener, "camera_depth_optical_frame", 10);
         tf_pc2_sub->registerCallback(boost::bind(&Projector::pointCloud2Callback, this, _1));
-        tfm_pub = nh_tfm.advertise<uncertain_obstacle::Matrix>("/transform_info", 10);
+        tfm_pub = nh_tfm.advertise<objectness_score::Matrix>("/transform_info", 10);
     }
 
     ~Projector() {

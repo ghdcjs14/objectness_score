@@ -2,7 +2,7 @@
 // Created by hongsun on 19. 4. 12.
 //
 
-#include <uncertain_obstacle/Projector.h>
+#include <objectness_score/Projector.h>
 
 void Projector::pointCloud2Callback(const sensor_msgs::PointCloud2ConstPtr &msg) {
 
@@ -22,7 +22,7 @@ void Projector::pointCloud2Callback(const sensor_msgs::PointCloud2ConstPtr &msg)
 
 //    std::cout << "worldTOSensor " << worldToSensor << std::endl;
 
-    uncertain_obstacle::Matrix transform_msg;
+    objectness_score::Matrix transform_msg;
 
     for(int i=0; i<4; i++) {
         for(int j=0; j<4; j++) {

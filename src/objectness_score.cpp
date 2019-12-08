@@ -15,11 +15,11 @@
 #include <geometry_msgs/Point.h>
 #include <sensor_msgs/CameraInfo.h>
 #include <Eigen/Dense>
-#include "uncertain_obstacle/Result.h"
+#include "objectness_score/Result.h"
 
 // PCL specific includes
 #include <sensor_msgs/PointCloud2.h>
-#include <uncertain_obstacle/Collector.h>
+#include <objectness_score/Collector.h>
 
 // FPFH
 #include <pcl/point_types.h>
@@ -27,7 +27,7 @@
 #include <pcl/features/fpfh.h>
 #include <pcl/filters/filter.h>
 
-#include <uncertain_obstacle/Projector.h>
+#include <objectness_score/Projector.h>
 
 // Surface
 #include <pcl/point_types.h>
@@ -617,7 +617,7 @@ void publishObstaclePointCloud(sensor_msgs::RegionOfInterest box) {
     obs_pc2_pub.publish(msg);
 }
 
-void maskRcnnCallback(const uncertain_obstacle::Result::ConstPtr& msg) {
+void maskRcnnCallback(const objectness_score::Result::ConstPtr& msg) {
 
     // get time
     clock_t begin, end;
@@ -778,7 +778,7 @@ void pointCloud2Callback(const sensor_msgs::PointCloud2ConstPtr &msg) {
     cout<<"pointCloud2Callback time duration(ms) : " << (double)(end-begin)/1000 << endl;
 }
 
-void transformCallback(const uncertain_obstacle::MatrixConstPtr &msg) {
+void transformCallback(const objectness_score::MatrixConstPtr &msg) {
     clock_t begin, end;
     begin = clock();
 
@@ -819,7 +819,7 @@ int main(int argc, char* argv[]) {
 
     initMap();
 
-    ros::init(argc, argv, "uncertain_obstacle");
+    ros::init(argc, argv, "objectness_score");
 
     Collector collector;    // Publish the Point Cloud(World Coordinates)
     Projector projector;    // Publish the Transformation Matrix(Image Coordinates)
@@ -853,7 +853,7 @@ int main(int argc, char* argv[]) {
     ros::Subscriber odom_sub = nh_odom.subscribe("/odom", 1, odomCallback);
 
     ros::Subscriber pc2_sub = nh_pc2.subscribe<sensor_msgs::PointCloud2>("/obj_point_cloud", 1, pointCloud2Callback);
-    ros::Subscriber tfm_sub = nh_tfm.subscribe<uncertain_obstacle::Matrix>("/transform_info", 1, transformCallback);
+    ros::Subscriber tfm_sub = nh_tfm.subscribe<objectness_score::Matrix>("/transform_info", 1, transformCallback);
 
     //// Publisher
     marker_pub = nh_marker_pub.advertise<visualization_msgs::Marker>("/obstacles_points",1);
