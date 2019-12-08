@@ -10,7 +10,9 @@ This is a ROS package of [An Objectness Score for Accurate an Fast Detection for
 * [ROS package of turtlebot_simulator](https://github.com/turtlebot/turtlebot_simulator)
 
 ## Run 
+```bash
 rosrun objctness_score objectness_score
+```
 
-## Example
-![example](images/test_result.png)
+## Test results
+![test_result](images/test_result.png)
